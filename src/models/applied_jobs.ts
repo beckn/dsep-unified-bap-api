@@ -18,8 +18,6 @@ const appliedJobSchema = {
 
 const AppliedJobs = model<IappliedJobs>("applied_jobs", new Schema<IappliedJobs>(appliedJobSchema));
 
-const models = {
-    AppliedJobs,
-};
 
-export { models, IappliedJobs };
+
+export { AppliedJobs };

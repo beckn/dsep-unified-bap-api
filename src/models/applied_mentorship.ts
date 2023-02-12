@@ -22,8 +22,6 @@ const appliedMentorshipSchema = {
 
 const AppliedMentorship = model<IAppliedMentorship>("applied_mentorships", new Schema<IAppliedMentorship>(appliedMentorshipSchema));
 
-const models = {
-    AppliedMentorship,
-};
 
-export { models };
+
+export { AppliedMentorship };

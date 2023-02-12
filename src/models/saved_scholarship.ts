@@ -20,8 +20,5 @@ const savedScholarshipSchema = {
 
 const SavedScholarships = model<ISavedScholarship>("saved_scholarships", new Schema<ISavedScholarship>(savedScholarshipSchema));
 
-const models = {
-    SavedScholarships,
-};
 
-export { models };
+export { SavedScholarships };

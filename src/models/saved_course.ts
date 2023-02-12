@@ -20,8 +20,6 @@ const savedCourseSchema = {
 
 const SavedCourses = model<ISavedCourse>("saved_courses", new Schema<ISavedCourse>(savedCourseSchema));
 
-const models = {
-    SavedCourses,
-};
 
-export { models };
+
+export { SavedCourses };

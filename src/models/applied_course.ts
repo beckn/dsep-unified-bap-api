@@ -18,8 +18,6 @@ const appliedCourseSchema = {
 
 const AppliedCourses = model<Iappliedcourse>("applied_courses", new Schema<Iappliedcourse>(appliedCourseSchema));
 
-const models = {
-    AppliedCourses,
-};
 
-export { models };
+
+export { AppliedCourses };

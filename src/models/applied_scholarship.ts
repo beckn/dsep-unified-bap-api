@@ -18,8 +18,5 @@ const appliedScholarshipSchema = {
 
 const AppliedScholarships = model<IappliedScholarship>("applied_scholarships", new Schema<IappliedScholarship>(appliedScholarshipSchema));
 
-const models = {
-    AppliedScholarships,
-};
 
-export { models, IappliedScholarship };
+export { AppliedScholarships };

@@ -20,8 +20,4 @@ const savedJobSchema = {
 
 const SavedJobs = model<IsavedJobs>("saved_jobs", new Schema<IsavedJobs>(savedJobSchema));
 
-const models = {
-    SavedJobs,
-};
-
-export { models, SavedJobs };
+export { SavedJobs };
