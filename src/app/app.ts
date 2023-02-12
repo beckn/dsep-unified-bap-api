@@ -41,7 +41,7 @@ const initApp = ({ app }: InitAppParams) => {
     router.use("/ping", (req: Request, res: Response) => {
         res.json({
             status: 200,
-            message: "Ping successfully",
+            message: "Ping successfully1",
             deployMessage: "Removed validation for description in project create"
         });
     });
