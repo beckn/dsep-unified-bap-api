@@ -22,7 +22,7 @@ const resumeSchema = {
 
 };
 
-const Resume = model<IResume>("saved_courses", new Schema<IResume>(resumeSchema));
+const Resume = model<IResume>("resumes", new Schema<IResume>(resumeSchema));
 
 const models = {
     Resume,

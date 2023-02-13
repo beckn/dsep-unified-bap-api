@@ -21,3 +21,4 @@ const AppliedJobs = model<IappliedJobs>("applied_jobs", new Schema<IappliedJobs>
 
 
 export { AppliedJobs };
+

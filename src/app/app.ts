@@ -46,7 +46,7 @@ const initApp = ({ app }: InitAppParams) => {
         });
     });
 
-    router.use("/DSEP/BAP", routes());
+    router.use("/api", routes());
 
 
     app.listen(port, () => {

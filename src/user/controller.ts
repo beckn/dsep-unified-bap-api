@@ -8,34 +8,36 @@ import { SavedCourses } from "../models/saved_course";
 import { SavedJobs } from "../models/saved_jobs";
 import { SavedMentorships } from "../models/saved_mentorship";
 import { SavedScholarships } from "../models/saved_scholarship";
+import { getUserDetails } from "./service";
 
-export const getUserDetails = async (req: Request, res: Response, next: NextFunction) => {
+export const UserDetails = async () => {
     try {
-        const email = req.params.email
+        const email = 'vivekkya6@gmail.com'
         const data = await user.User.findOne({
             email: email
         })
-        if (!data) {
-            res.locals = {
-                success: false,
-                message: "User profile could not be retrieved"
-            }
-            return next()
-        }
-        res.locals = {
-            data: data,
-            success: true,
-            message: "User profile is retrieved"
-        }
-        return next()
+        console.log(data)
+        // if (!data) {
+        //     res.locals = {
+        //         success: false,
+        //         message: "User profile could not be retrieved"
+        //     }
+        //     return next()
+        // }
+        // res.locals = {
+        //     data: data,
+        //     success: true,
+        //     message: "User profile is retrieved"
+        // }
+        // return next()
     }
     catch (e) {
-        res.locals = {
-            success: false,
-            path: "/user/profile",
-            message: e
-        }
-        return next()
+        // res.locals = {
+        //     success: false,
+        //     path: "/user/profile",
+        //     message: e
+        // }
+        // return next()
     }
 }
 
@@ -51,6 +53,7 @@ export const addUser = async (req: Request, res: Response, next: NextFunction) =
             created_at: Date.now(),
             last_modified_at: Date.now()
         })
+        console.log("im herre")
         if (!data) {
             res.locals = {
                 success: false,
@@ -75,43 +78,42 @@ export const addUser = async (req: Request, res: Response, next: NextFunction) =
     }
 }
 
-export const savedItems = async (req: Request, res: Response, next: NextFunction) => {
+export const savedItems = async () => {
     try {
-        const email = req.params.email
-        const userDetails = await user.User.findOne({ email: email })
+        const userDetails = await getUserDetails('vivekkya6@gmail.com')
         const jobs = await SavedJobs.find({ user_id: userDetails?.id })
         const mentorship = await SavedMentorships.find({ user_id: userDetails?.id })
         const scholarship = await SavedScholarships.find({ user_id: userDetails?.id })
         const courses = await SavedCourses.find({ user_id: userDetails?.id })
         const data = { jobs, mentorship, scholarship, courses }
-        if (!data) {
-            res.locals = {
-                success: false,
-                message: "Failed to get saved items"
-            }
-            return next()
-        }
-        res.locals = {
-            data: data,
-            success: true,
-            message: "Saved items has been retreived"
-        }
-        return next()
+        console.log(data)
+        // if (!data) {
+        //     res.locals = {
+        //         success: false,
+        //         message: "Failed to get saved items"
+        //     }
+        //     return next()
+        // }
+        // res.locals = {
+        //     data: data,
+        //     success: true,
+        //     message: "Saved items has been retreived"
+        // }
+        // return next()
     }
     catch (e) {
-        res.locals = {
-            success: false,
-            // path: "/user/profile",
-            message: e
-        }
-        return next()
+        // res.locals = {
+        //     success: false,
+        //     // path: "/user/profile",
+        //     message: e
+        // }
+        // return next()
     }
 }
 
 export const appliedItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const email = req.params.email
-        const userDetails = await user.User.findOne({ email: email })
+        const userDetails = await getUserDetails(req.params.email)
         const jobs = await AppliedJobs.find({ user_id: userDetails?.id })
         const mentorship = await AppliedMentorship.find({ user_id: userDetails?.id })
         const scholarship = await AppliedScholarships.find({ user_id: userDetails?.id })
@@ -144,8 +146,7 @@ export const appliedItems = async (req: Request, res: Response, next: NextFuncti
 
 export const items = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const email = req.params.email
-        const userDetails = await user.User.findOne({ email: email })
+        const userDetails = await getUserDetails(req.params.email)
         const savedJobs = await SavedJobs.find({ user_id: userDetails?.id })
         const savedMentorship = await SavedMentorships.find({ user_id: userDetails?.id })
         const savedScholarship = await SavedScholarships.find({ user_id: userDetails?.id })
