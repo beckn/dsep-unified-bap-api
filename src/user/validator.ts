@@ -18,6 +18,13 @@ const createUser = () => {
         body("last_name").exists().withMessage("last name is required")
     ]);
 };
+const createResume = () => {
+    return validate([
+        body("document").exists().withMessage("document is required"),
+        body("document_type").exists().withMessage("document type is required")
+    ]);
+};
 export const validator = {
     createUser,
+    createResume
 };
