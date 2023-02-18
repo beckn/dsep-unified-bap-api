@@ -14,6 +14,6 @@ export const usersRoutes = () => {
     router.get("/item/saved/:email", savedItems, response)
     router.get("/item/applied/:email", appliedItems, response);
     router.get("/resume/:email", getResumeDetails, response);
-    router.post("/resume", validator.createResume(), auth, addResume, response);
+    router.post("/resume", validator.createResume(), addResume, response);
     return router
 }
