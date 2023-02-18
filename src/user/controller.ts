@@ -162,9 +162,10 @@ export const items = async (req: Request, res: Response, next: NextFunction) => 
 
 export const addResume = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log('yfduvgjhvgyuctuy')
         const body = req.body
         const data = await resumes.Resume.create({
-            user_id: new ObjectId(req.auth.id),
+            user_id: new ObjectId(body.user_id),
             document: body.document,
             document_type: body.document_type,
             active: false,
