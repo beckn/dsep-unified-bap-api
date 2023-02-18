@@ -46,7 +46,7 @@ const initApp = ({ app }: InitAppParams) => {
         });
     });
 
-    router.use("/api", routes());
+    router.use("/", routes());
 
 
     app.listen(port, () => {
