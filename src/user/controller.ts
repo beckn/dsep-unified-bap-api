@@ -164,7 +164,7 @@ export const addResume = async (req: Request, res: Response, next: NextFunction)
     try {
         const body = req.body
         const data = await resumes.Resume.create({
-            user_id: new ObjectId(req.auth.id),
+            user_id: new ObjectId(req.body.user_id),
             document: body.document,
             document_type: body.document_type,
             active: false,
