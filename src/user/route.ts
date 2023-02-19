@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { addResume, addUser, appliedItems, getResumeDetails, items, savedItems, UserDetails } from "./controller";
+import { addResume, addUser, appliedItems, getResumeDetails, items, myItem, savedItems, UserDetails } from "./controller";
 import { response } from "../middleware/response";
 import { validator } from "./validator";
 import { auth } from "../middleware/auth";
@@ -15,5 +15,6 @@ export const usersRoutes = () => {
     router.get("/item/applied/:email", appliedItems, response);
     router.get("/resume/:email", getResumeDetails, response);
     router.post("/resume", validator.createResume(), addResume, response);
+    router.post("/item/:category/:email/:action", myItem, response);
     return router
 }

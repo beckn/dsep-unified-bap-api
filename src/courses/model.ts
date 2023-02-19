@@ -3,23 +3,25 @@ import { Schema, model, Types } from "mongoose";
 
 interface Icourses {
     course_id: string;
-    provider: String
+    provider_id: String
     title: String;
     duration: String;
     bpp_id: String;
     bpp_uri: String;
-    active: Boolean
+    active: Boolean;
+    data: string;
     created_at: number;
     last_modified_at: number;
 }
 
 const courseSchema = {
     course_id: { type: String, required: false },
-    provider: {
+    provider_id: {
         type: String,
         required: true,
     },
     title: { type: String, required: false },
+    data: { type: String, required: false },
     duration: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
@@ -30,8 +32,4 @@ const courseSchema = {
 
 const Courses = model<Icourses>("courses", new Schema<Icourses>(courseSchema));
 
-const models = {
-    Courses,
-};
-
-export { models, Icourses };
+export { Courses, Icourses };

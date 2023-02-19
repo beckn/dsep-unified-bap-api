@@ -11,6 +11,10 @@ import { SavedScholarships } from "../models/saved_scholarships";
 import { getUserDetails } from "./service";
 import { ObjectId } from "mongodb";
 import { models as resumes } from '../resumes'
+import { Job } from "../jobs/model";
+import { Courses } from "../courses/model";
+import { Scholarships } from "../scholarships/model";
+import { Mentorships } from "../mentorships/model";
 
 export const UserDetails = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -211,6 +215,325 @@ export const getResumeDetails = async (req: Request, res: Response, next: NextFu
             return next()
         }
         return res.json(data)
+    }
+    catch (e) {
+        res.locals = {
+            success: false,
+            path: "/user/resume/email",
+            message: e
+        }
+        return next()
+    }
+}
+
+export const myItem = async (req: Request, res: Response, next: NextFunction) => {
+    const action = req?.params?.action
+    const category = req?.params?.category
+    const email = req?.params?.email
+    const userDetails = await getUserDetails(email)
+    const body = req.body
+    try {
+        if (category === 'job' && action === 'save') {
+            let response;
+            const jobData: any = await Job.findOne({ job_id: body?.job_id, provider_id: body?.provider_id })
+            if (jobData) {
+                console.log(jobData)
+                const savedJob = await SavedJobs.create({
+                    user_id: userDetails?.id,
+                    job_id: jobData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(jobData)
+            }
+            else {
+                const jobData = await Job.create({
+                    job_id: body.job_id,
+                    comapny: body.company,
+                    provider_id: body.provider_id,
+                    city: body.city,
+                    role: body.role,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    location_type: "Do",
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const savedJob = await SavedJobs.create({
+                    user_id: userDetails?.id,
+                    job_id: jobData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(jobData)
+            }
+        }
+        if (category === 'job' && action === 'applied') {
+            let response;
+            const jobData: any = await Job.findOne({ job_id: body?.job_id, provider_id: body?.provider_id })
+            const deleteSave = await SavedJobs.deleteOne({ job_id: jobData?.id, user_id: userDetails?.id })
+            if (jobData) {
+                console.log(jobData)
+                const appliedJob = await AppliedJobs.create({
+                    user_id: userDetails?.id,
+                    job_id: jobData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(jobData)
+            }
+            else {
+                const jobData = await Job.create({
+                    job_id: body.job_id,
+                    comapny: body.company,
+                    provider_id: body.provider_id,
+                    city: body.city,
+                    role: body.role,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    location_type: "Do",
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const appliedJob = await SavedJobs.create({
+                    user_id: userDetails?.id,
+                    job_id: jobData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(jobData)
+            }
+        }
+        if (category === 'course' && action === 'save') {
+            let response;
+            const courseData: any = await Courses.findOne({ course_id: body?.course_id, provider_id: body?.provider_id })
+            if (courseData) {
+                console.log(courseData)
+                const savedCourse = await SavedCourses.create({
+                    user_id: userDetails?.id,
+                    course_id: courseData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(courseData)
+            }
+            else {
+                const courseData = await Courses.create({
+                    course_id: body.job_id,
+                    provider_id: body.provider_id,
+                    title: body.title,
+                    duration: body.duration,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const savedCourse = await SavedCourses.create({
+                    user_id: userDetails?.id,
+                    course_id: courseData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(courseData)
+            }
+        }
+        if (category === 'course' && action === 'applied') {
+            let response;
+            const courseData: any = await Courses.findOne({ course_id: body?.course_id, provider_id: body?.provider_id })
+            const deleteSave = await SavedCourses.deleteOne({ course_id: courseData?.id, user_id: userDetails?.id })
+            if (courseData) {
+                const appliedCourses = await AppliedCourses.create({
+                    user_id: userDetails?.id,
+                    course_id: courseData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(courseData)
+            }
+            else {
+                const courseData = await Courses.create({
+                    course_id: body.course_id,
+                    provider_id: body.provider_id,
+                    title: body.title,
+                    duration: body.duration,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const appliedCourses = await AppliedCourses.create({
+                    user_id: userDetails?.id,
+                    course_id: courseData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(courseData)
+            }
+        }
+        if (category === 'scholarship' && action === 'save') {
+            let response;
+            const scholarshipData: any = await Scholarships.findOne({ scholarship_id: body?.scholarship_id, provider_id: body?.provider_id })
+            if (scholarshipData) {
+                console.log(scholarshipData)
+                const savedScholarship = await SavedScholarships.create({
+                    user_id: userDetails?.id,
+                    scholarship_id: scholarshipData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(scholarshipData)
+            }
+            else {
+                const scholarshipData = await Scholarships.create({
+                    scholarship_id: body.job_id,
+                    provider_id: body.provider_id,
+                    fulfillment_id: body.fulfillment_id,
+                    title: body.title,
+                    category: body.category,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const savedScholarship = await SavedScholarships.create({
+                    user_id: userDetails?.id,
+                    scholarship_id: scholarshipData?.id,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(scholarshipData)
+            }
+        }
+        if (category === 'scholarship' && action === 'applied') {
+            let response;
+            const scholarshipData: any = await Scholarships.findOne({ scholarship_id: body?.scholarship_id, provider_id: body?.provider_id })
+            const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: scholarshipData?.id, user_id: userDetails?.id })
+            if (scholarshipData) {
+                const appliedScholarship = await AppliedScholarships.create({
+                    user_id: userDetails?.id,
+                    scholarship_id: scholarshipData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(scholarshipData)
+            }
+            else {
+                const scholarshipData = await Courses.create({
+                    scholarship_id: body.job_id,
+                    provider_id: body.provider_id,
+                    fulfillment_id: body.fulfillment_id,
+                    title: body.title,
+                    category: body.category,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    data: body.data,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const appliedScholarship = await AppliedScholarships.create({
+                    user_id: userDetails?.id,
+                    scholarship_id: scholarshipData?.id,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(scholarshipData)
+            }
+        }
+        if (category === 'mentorship' && action === 'save') {
+            let response;
+            const mentorshipData: any = await Mentorships.findOne({ mentorship_id: body?.mentorship_id, provider_id: body?.provider_id })
+            if (mentorshipData) {
+                const savedMentorship = await SavedMentorships.create({
+                    user_id: userDetails?.id,
+                    mentorship_id: mentorshipData?.id,
+                    slot: body.slot,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(mentorshipData)
+            }
+            else {
+                const mentorshipData = await Mentorships.create({
+                    mentorship_id: body.mentorship_id,
+                    mentor: body.mentor,
+                    provider_id: body.provider_id,
+                    credentials: body.credentials,
+                    experties: body.experties,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const savedMentorship = await SavedMentorships.create({
+                    user_id: userDetails?.id,
+                    mentorship_id: mentorshipData?.id,
+                    slot: 'slot',
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(mentorshipData)
+            }
+        }
+        if (category === 'mentorship' && action === 'applied') {
+            let response;
+            const mentorshipData: any = await Mentorships.findOne({ mentorship_id: body?.mentorship_id, provider_id: body?.provider_id })
+            const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: mentorshipData?.id, user_id: userDetails?.id })
+            if (mentorshipData) {
+                const appliedMentorship = await AppliedMentorship.create({
+                    user_id: userDetails?.id,
+                    mentorship_id: mentorshipData?.id,
+                    slot: 'slot',
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(mentorshipData)
+            }
+            else {
+                const mentorshipData = await Mentorships.create({
+                    mentorship_id: body.mentorship_id,
+                    mentor: body.mentor,
+                    credentials: body.credentials,
+                    provider_id: body.provider_id,
+                    experties: body.experties,
+                    bpp_id: body.bpp_id,
+                    bpp_uri: body.bpp_uri,
+                    active: true,
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                const appliedMentorship = await AppliedMentorship.create({
+                    user_id: userDetails?.id,
+                    mentorship_id: mentorshipData?.id,
+                    active: true,
+                    slot: 'Slot',
+                    created_at: Date.now(),
+                    last_modified_at: Date.now()
+                })
+                return res.json(mentorshipData)
+            }
+        }
+
     }
     catch (e) {
         res.locals = {

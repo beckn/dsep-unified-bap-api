@@ -3,7 +3,8 @@ import { Schema, model, Types } from "mongoose";
 
 interface Imentorship {
     mentorship_id: string;
-    mentor: String
+    mentor: String;
+    provider_id: string;
     credentials: String;
     experties: String;
     bpp_id: String;
@@ -15,10 +16,14 @@ interface Imentorship {
 
 const mentorshipSchema = {
     mentorship_id: { type: String, required: false },
+    provider_id: { type: String, required: false },
     mentor: {
         type: String,
         required: true,
     },
+    mentorRating: { type: String, required: false },
+    mentorshipTitle: { type: String, required: false },
+    data: { type: String, required: false },
     credentials: { type: String, required: false },
     experties: { type: String, required: false },
     bpp_id: { type: String, required: false },
@@ -30,8 +35,4 @@ const mentorshipSchema = {
 
 const Mentorships = model<Imentorship>("mentorshis", new Schema<Imentorship>(mentorshipSchema));
 
-const models = {
-    Mentorships,
-};
-
-export { models, Imentorship };
+export { Mentorships, Imentorship };
