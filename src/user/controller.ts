@@ -463,7 +463,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                 const savedMentorship = await SavedMentorships.create({
                     user_id: userDetails?.id,
                     mentorship_id: mentorshipData?.id,
-                    slot: body.slot,
+                    slot: 'slot',
                     active: true,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
