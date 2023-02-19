@@ -33,6 +33,6 @@ const mentorshipSchema = {
     last_modified_at: { type: Number, required: false }
 };
 
-const Mentorships = model<Imentorship>("mentorshis", new Schema<Imentorship>(mentorshipSchema));
+const Mentorships = model<Imentorship>("mentorships", new Schema<Imentorship>(mentorshipSchema));
 
 export { Mentorships, Imentorship };

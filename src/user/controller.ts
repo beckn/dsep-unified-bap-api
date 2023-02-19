@@ -81,10 +81,10 @@ export const savedItems = async (req: Request, res: Response, next: NextFunction
             }
             return next()
         }
-        const jobs = await SavedJobs.find({ user_id: userDetails?.id })
-        const mentorship = await SavedMentorships.find({ user_id: userDetails?.id })
-        const scholarship = await SavedScholarships.find({ user_id: userDetails?.id })
-        const courses = await SavedCourses.find({ user_id: userDetails?.id })
+        let jobs: any = await SavedJobs.find({ user_id: userDetails?.id }).populate("job_id")
+        let mentorship = await SavedMentorships.find({ user_id: userDetails?.id }).populate("mentorship_id")
+        let scholarship = await SavedScholarships.find({ user_id: userDetails?.id }).populate("scholarship_id")
+        let courses = await SavedCourses.find({ user_id: userDetails?.id }).populate("course_id")
         return res.json({ jobs, mentorship, scholarship, courses })
     }
     catch (e) {
@@ -109,10 +109,10 @@ export const appliedItems = async (req: Request, res: Response, next: NextFuncti
             }
             return next()
         }
-        const jobs = await AppliedJobs.find({ user_id: userDetails?.id })
-        const mentorship = await AppliedMentorship.find({ user_id: userDetails?.id })
-        const scholarship = await AppliedScholarships.find({ user_id: userDetails?.id })
-        const courses = await AppliedCourses.find({ user_id: userDetails?.id })
+        const jobs = await AppliedJobs.find({ user_id: userDetails?.id }).populate("job_id")
+        const mentorship = await AppliedMentorship.find({ user_id: userDetails?.id }).populate("mentorship_id")
+        const scholarship = await AppliedScholarships.find({ user_id: userDetails?.id }).populate("scholarship_id")
+        const courses = await AppliedCourses.find({ user_id: userDetails?.id }).populate("course_id")
 
         return res.json({ jobs, mentorship, scholarship, courses })
     }
@@ -139,14 +139,14 @@ export const items = async (req: Request, res: Response, next: NextFunction) => 
             }
             return next()
         }
-        const savedJobs = await SavedJobs.find({ user_id: userDetails?.id })
-        const savedMentorship = await SavedMentorships.find({ user_id: userDetails?.id })
-        const savedScholarship = await SavedScholarships.find({ user_id: userDetails?.id })
-        const savedCourses = await SavedCourses.find({ user_id: userDetails?.id })
-        const appliedJobs = await AppliedJobs.find({ user_id: userDetails?.id })
-        const appliedMentorship = await AppliedMentorship.find({ user_id: userDetails?.id })
-        const appliedScholarship = await AppliedScholarships.find({ user_id: userDetails?.id })
-        const appliedCourses = await AppliedCourses.find({ user_id: userDetails?.id })
+        const savedJobs = await SavedJobs.find({ user_id: userDetails?.id }).populate("job_id")
+        const savedMentorship = await SavedMentorships.find({ user_id: userDetails?.id }).populate("mentorship_id")
+        const savedScholarship = await SavedScholarships.find({ user_id: userDetails?.id }).populate("scholarship_id")
+        const savedCourses = await SavedCourses.find({ user_id: userDetails?.id }).populate("course_id")
+        const appliedJobs = await AppliedJobs.find({ user_id: userDetails?.id }).populate("job_id")
+        const appliedMentorship = await AppliedMentorship.find({ user_id: userDetails?.id }).populate("mentorship_id")
+        const appliedScholarship = await AppliedScholarships.find({ user_id: userDetails?.id }).populate("scholarship_id")
+        const appliedCourses = await AppliedCourses.find({ user_id: userDetails?.id }).populate("course_id")
         return res.json({
             jobs: { save: savedJobs, applied: appliedJobs },
             courses: { save: savedCourses, applied: appliedCourses },
@@ -463,7 +463,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                 const savedMentorship = await SavedMentorships.create({
                     user_id: userDetails?.id,
                     mentorship_id: mentorshipData?.id,
-                    slot: body.slot,
+                    slot: 'slot',
                     active: true,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
