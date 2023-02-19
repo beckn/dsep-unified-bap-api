@@ -3,9 +3,11 @@ import { Schema, model, Types } from "mongoose";
 
 interface Ischolarship {
     scholarship_id: string;
-    provider: String
+    provider_id: String;
+    fulfillment_id: string;
     title: String;
-    criteria: String;
+    category: String;
+    data: string;
     bpp_id: String;
     bpp_uri: String;
     active: Boolean
@@ -15,12 +17,14 @@ interface Ischolarship {
 
 const scholarshipSchema = {
     scholarship_id: { type: String, required: false },
-    provider: {
+    provider_id: {
         type: String,
         required: true,
     },
+    fulfillment_id: { type: String, required: false },
     title: { type: String, required: false },
-    criteria: { type: String, required: false },
+    category: { type: String, required: false },
+    data: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
     active: { type: Boolean, default: false },
@@ -30,8 +34,5 @@ const scholarshipSchema = {
 
 const Scholarships = model<Ischolarship>("scholarships", new Schema<Ischolarship>(scholarshipSchema));
 
-const models = {
-    Scholarships,
-};
 
-export { models, Ischolarship };
+export { Scholarships, Ischolarship };
