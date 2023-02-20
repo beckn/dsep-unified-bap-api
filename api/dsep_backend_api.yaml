@@ -1,0 +1,1178 @@
+openapi: 3.0.0
+info:
+  version: 0.0.2
+  title: DSEP Backend API
+  description: Backend API to manage DSEP user profile.
+paths:
+  /user/profile:
+    post:
+      tags:
+        - SetupUserProfile
+      summary: Setup user profile
+      requestBody:
+        description: User profile object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserProfile'
+            example:
+              _id: "5f92cbf10cf217478ba93561"
+              email: "test.user@gmail.com"
+              first_name: "test"
+              middle_name:  ""
+              last_name: "user"
+              full_name: ""
+              mobile: "9999999999" 
+              created_at: "2023-01-27T07:10:30Z"
+              last_modofied_at: "2023-01-27T07:10:30Z"
+      responses:
+        '200':
+          description: User profile is updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                _id: "5f92cbf10cf217478ba93561"
+                email: "test.user@gmail.com"
+                first_name: "test"
+                middle_name:  ""
+                last_name: "user"
+                full_name: ""
+                mobile: "9999999999" 
+                created_at: "2023-01-27T07:10:30Z"
+                last_modofied_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: User profile could not be created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/profile"
+                message: "User profile could not be created"
+        '500':
+          description: User profile could not be created due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/profile"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/profile/{email}:
+    parameters:
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+    get:
+      tags:
+        - GetUserProfile
+      summary: Get the User profile
+      responses:
+        '200':
+          description: User profile is retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+              example:
+                _id: "5f92cbf10cf217478ba93561"
+                email: "test.user@gmail.com"
+                first_name: "test"
+                middle_name:  ""
+                last_name: "user"
+                full_name: ""
+                mobile: "9999999999" 
+                created_at: "2023-01-27T07:10:30Z"
+                last_modofied_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: User profile could not be retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/profile"
+                message: "User profile could not be retrieved"
+        '500':
+          description: User profile could not be retrieved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/profile"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/resume:
+    post:
+      tags:
+        - AddUserResume
+      summary: Add User Resume
+      requestBody:
+        description: User resume object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResume'
+      responses:
+        '200':
+          description: User resume is uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResume'
+        '404':
+          description: User resume could not be uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/resume"
+                message: "User resume could not be uploaded"
+        '500':
+          description: User resume could not be uploaded due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/resume"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/resume/{email}:
+    parameters:
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+    get:
+      tags:
+        - GetUserResume
+      summary: Get the User resume
+      responses:
+        '200':
+          description: User resume is retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDocument'
+        '404':
+          description: User resume could not be retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/resume"
+                message: "User resume could not be retrieved"
+        '500':
+          description: User resume could not be retrieved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/resume"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/item/{category}/{email}/{action}:
+    parameters:
+      - name: category
+        description: DSEP category
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+            - job
+            - course
+            - scholarship
+            - mentorship
+        example:
+          "job"
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+      - name: action
+        description: descriptor to identify either saved or applied item
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+            - save
+            - applied
+        example:
+          "applied"
+    post:
+      tags:
+        - addMyItem
+      summary: Add item in my catalog either as applied or saved item
+      requestBody:
+        description: Item object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              oneOf:
+                - $ref: '#/components/schemas/Job'
+                - $ref: '#/components/schemas/Course'
+                - $ref: '#/components/schemas/Scholarship'
+                - $ref: '#/components/schemas/Mentorship'
+            examples:
+              Add saved Job:
+                value:
+                  _id: "5f92cbf10cf217478ba93565"
+                  job_id: "D7F8606A370DA9966DF15E62A81C374C"
+                  provider_id: "2"
+                  application_id: 
+                  role: "Engineering Manager"
+                  company: "Accenture"
+                  city: "Pune"
+                  data: "Response object from select api"
+                  bpp_id: "affinidi.com.bpp"
+                  bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add applied Job:
+                value:
+                  _id: "5f92cbf10cf217478ba93564"
+                  job_id: "D7F8606A370DA9966DF15E62A81C374B"
+                  provider_id: "1"
+                  application_id: "1676633409805"
+                  role: "Architect"
+                  company: "Google"
+                  city: "Pune"
+                  data: "Response object from confirm api"
+                  bpp_id: "affinidi.com.bpp"
+                  bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add saved Course:
+                value:
+                  _id: "5f92cbf10cf217478ba93567"
+                  course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDJ"
+                  provider_id: "CEC"
+                  application_id: 
+                  title: "System Design"
+                  duration": "10 Hours"
+                  data: "Response object from select api"
+                  bpp_id: "bpp.dsep.samagra.i"
+                  bpp_uri: "https://bpp.dsep.samagra.io"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add applied Course:
+                value:
+                  _id: "5f92cbf10cf217478ba93566"
+                  course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDI"
+                  provider_id: "CEC"
+                  application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
+                  title: "Problem solving Aspects and Python Programming"
+                  duration": "12 weeks"
+                  data: "Response object from confirm api"
+                  bpp_id: "bpp.dsep.samagra.i"
+                  bpp_uri: "https://bpp.dsep.samagra.io"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add saved Scholarship:
+                value:
+                  _id: "5f92cbf10cf217478ba93569"
+                  scholarship_id: "SCM_58741445"
+                  provider_id: "ZQU31169990"
+                  fulfillment_id: "DSEP_FUL_58741445"
+                  application_id: 
+                  title: "XYZ Undergraduation scholarship for Economically Backward Students"
+                  category: "DSEP_CAT_2"
+                  data: "Response object from select api"
+                  bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                  bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add applied Scholarship:
+                value:
+                  _id: "5f92cbf10cf217478ba93568"
+                  scholarship_id: "SCM_58741444"
+                  provider_id: "ZQU31169990"
+                  fulfillment_id: "DSEP_FUL_58741444"
+                  application_id: "APP_32620371"
+                  title: "XYZ Undergraduation scholarship for Economically Backward Female Students"
+                  category: "DSEP_CAT_2"
+                  data: "Response object from confirm api"
+                  bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                  bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add saved Mentorship:
+                value:
+                  _id: "5f92cbf10cf217478ba93571"
+                  mentorship_id: "63e6298723df08285693637b"
+                  provider_id: "63d93aea62820fd9e6be9d1b"
+                  application_id: 
+                  mentor: "John Doe 2"
+                  mentorRating: "4.2"
+                  mentorshipTitle": "Class Room Engineering Level 1"
+                  data: "Response object from select api"
+                  bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                  bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                  created_at: "2023-01-27T07:10:30Z"
+              Add applied Mentorship:
+                value:
+                  _id: "5f92cbf10cf217478ba93570"
+                  mentorship_id: "63e6298723df08285693637a"
+                  provider_id: "63d93aea62820fd9e6be9d1b"
+                  application_id: ""
+                  mentor: "John Doe"
+                  mentorRating: "4.7"
+                  mentorshipTitle": "Class Room Management Level 1"
+                  data: "Response object from confirm api"
+                  bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                  bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                  created_at: "2023-01-27T07:10:30Z"
+      responses:
+        '200':
+          description: User item is saved
+          content:
+            application/json:
+              schema:
+                type: object
+                oneOf:
+                  - $ref: '#/components/schemas/Job'
+                  - $ref: '#/components/schemas/Course'
+                  - $ref: '#/components/schemas/Scholarship'
+                  - $ref: '#/components/schemas/Mentorship'
+              examples:
+                Add saved Job:
+                  value:
+                    job_id: "D7F8606A370DA9966DF15E62A81C374C"
+                    provider_id: "2"
+                    application_id: 
+                    role: "Engineering Manager"
+                    company: "Accenture"
+                    city: "Pune"
+                    data: "Response object from select api"
+                    bpp_id: "affinidi.com.bpp"
+                    bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add applied Job:
+                  value:
+                    job_id: "D7F8606A370DA9966DF15E62A81C374B"
+                    provider_id: "1"
+                    application_id: "1676633409805"
+                    role: "Architect"
+                    company: "Google"
+                    city: "Pune"
+                    data: "Response object from confirm api"
+                    bpp_id: "affinidi.com.bpp"
+                    bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add saved Course:
+                  value:
+                    course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDJ"
+                    provider_id: "CEC"
+                    application_id: 
+                    title: "System Design"
+                    duration": "10 Hours"
+                    data: "Response object from select api"
+                    bpp_id: "bpp.dsep.samagra.i"
+                    bpp_uri: "https://bpp.dsep.samagra.io"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add applied Course:
+                  value:
+                    course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDI"
+                    provider_id: "CEC"
+                    application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
+                    title: "Problem solving Aspects and Python Programming"
+                    duration": "12 weeks"
+                    data: "Response object from confirm api"
+                    bpp_id: "bpp.dsep.samagra.i"
+                    bpp_uri: "https://bpp.dsep.samagra.io"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add saved Scholarship:
+                  value:
+                    scholarship_id: "SCM_58741445"
+                    provider_id: "ZQU31169990"
+                    fulfillment_id: "DSEP_FUL_58741445"
+                    application_id: 
+                    title: "XYZ Undergraduation scholarship for Economically Backward Students"
+                    category: "DSEP_CAT_2"
+                    data: "Response object from select api"
+                    bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                    bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add applied Scholarship:
+                  value:
+                    scholarship_id: "SCM_58741444"
+                    provider_id: "ZQU31169990"
+                    fulfillment_id: "DSEP_FUL_58741444"
+                    application_id: "APP_32620371"
+                    title: "XYZ Undergraduation scholarship for Economically Backward Female Students"
+                    category: "DSEP_CAT_2"
+                    data: "Response object from confirm api"
+                    bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                    bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add saved Mentorship:
+                  value:
+                    mentorship_id: "63e6298723df08285693637b"
+                    provider_id: "63d93aea62820fd9e6be9d1b"
+                    application_id: 
+                    mentor: "John Doe 2"
+                    mentorRating: "4.2"
+                    mentorshipTitle": "Class Room Engineering Level 1"
+                    data: "Response object from select api"
+                    bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                    bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    created_at: "2023-01-27T07:10:30Z"
+                Add applied Mentorship:
+                  value:
+                    mentorship_id: "63e6298723df08285693637a"
+                    provider_id: "63d93aea62820fd9e6be9d1b"
+                    application_id: ""
+                    mentor: "John Doe"
+                    mentorRating: "4.7"
+                    mentorshipTitle": "Class Room Management Level 1"
+                    data: "Response object from confirm api"
+                    bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                    bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    created_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: User item could not be saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/item/{category}/{email}"
+                message: "User resume could not be uploaded"
+        '500':
+          description: User item could not be saved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/item/{category}/{email}"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/item/{email}:
+    parameters:
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+    get:
+      tags:
+        - GetUserItems
+      summary: Get the user saved and applied data for all dsep categories
+      responses:
+        '200':
+          description: User saved and applied data for all dsep categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserItems'
+              example:
+                jobs: 
+                  saved: 
+                    - _id: "5f92cbf10cf217478ba93565"
+                      job_id: "D7F8606A370DA9966DF15E62A81C374C"
+                      provider_id: "2"
+                      application_id: 
+                      role: "Engineering Manager"
+                      company: "Accenture"
+                      city: "Pune"
+                      data: "Response object from select api"
+                      bpp_id: "affinidi.com.bpp"
+                      bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                      created_at: "2023-01-27T07:10:30Z"
+                  applied: 
+                    - _id: "5f92cbf10cf217478ba93564"
+                      job_id: "D7F8606A370DA9966DF15E62A81C374B"
+                      provider_id: "1"
+                      application_id: "1676633409805"
+                      role: "Architect"
+                      company: "Google"
+                      city: "Pune"
+                      data: "Response object from confirm api"
+                      bpp_id: "affinidi.com.bpp"
+                      bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                      created_at: "2023-01-27T07:10:30Z"
+                courses: 
+                  saved: 
+                    - _id: "5f92cbf10cf217478ba93567"
+                      course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDJ"
+                      provider_id: "CEC"
+                      application_id: 
+                      title: "System Design"
+                      duration": "10 Hours"
+                      data: "Response object from select api"
+                      bpp_id: "bpp.dsep.samagra.i"
+                      bpp_uri: "https://bpp.dsep.samagra.io"
+                      created_at: "2023-01-27T07:10:30Z"
+                  applied: 
+                    - _id: "5f92cbf10cf217478ba93566"
+                      course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDI"
+                      provider_id: "CEC"
+                      application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
+                      title: "Problem solving Aspects and Python Programming"
+                      duration": "12 weeks"
+                      data: "Response object from confirm api"
+                      bpp_id: "bpp.dsep.samagra.i"
+                      bpp_uri: "https://bpp.dsep.samagra.io"
+                      created_at: "2023-01-27T07:10:30Z"
+                scholarships: 
+                  saved: 
+                    - _id: "5f92cbf10cf217478ba93569"
+                      scholarship_id: "SCM_58741445"
+                      provider_id: "ZQU31169990"
+                      fulfillment_id: "DSEP_FUL_58741445"
+                      application_id: 
+                      title: "XYZ Undergraduation scholarship for Economically Backward Students"
+                      category: "DSEP_CAT_2"
+                      data: "Response object from select api"
+                      bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                      bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                      created_at: "2023-01-27T07:10:30Z"
+                  applied: 
+                    - _id: "5f92cbf10cf217478ba93568"
+                      scholarship_id: "SCM_58741444"
+                      provider_id: "ZQU31169990"
+                      fulfillment_id: "DSEP_FUL_58741444"
+                      application_id: "APP_32620371"
+                      title: "XYZ Undergraduation scholarship for Economically Backward Female Students"
+                      category: "DSEP_CAT_2"
+                      data: "Response object from confirm api"
+                      bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                      bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                      created_at: "2023-01-27T07:10:30Z"
+                mentorships: 
+                  saved: 
+                    - _id: "5f92cbf10cf217478ba93571"
+                      mentorship_id: "63e6298723df08285693637b"
+                      provider_id: "63d93aea62820fd9e6be9d1b"
+                      application_id: 
+                      mentor: "John Doe 2"
+                      mentorRating: "4.2"
+                      mentorshipTitle": "Class Room Engineering Level 1"
+                      data: "Response object from select api"
+                      bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                      bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                      created_at: "2023-01-27T07:10:30Z"
+                  applied: 
+                    - _id: "5f92cbf10cf217478ba93570"
+                      mentorship_id: "63e6298723df08285693637a"
+                      provider_id: "63d93aea62820fd9e6be9d1b"
+                      application_id: "bcc0c798-81f2-4de5-823e-5769845b7d20"
+                      mentor: "John Doe"
+                      mentorRating: "4.7"
+                      mentorshipTitle": "Class Room Management Level 1"
+                      data: "Response object from confirm api"
+                      bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                      bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                      created_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: User saved and applied data for dsep categories not found for sessionId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/item/{email}"
+                message: "User saved and applied data for dsep categories not found for sessionId"
+        '500':
+          description: User saved and applied data for dsep categories could not be retrieved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/item/{email}"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/item/saved/{email}:
+    parameters:
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+    get:
+      tags:
+        - GetSavedItems
+      summary: Get the user saved items for all dsep categories
+      responses:
+        '200':
+          description: Saved items for User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesItem'
+              example:
+                jobs: 
+                  - _id: "5f92cbf10cf217478ba93565"
+                    job_id: "D7F8606A370DA9966DF15E62A81C374C"
+                    provider_id: "2"
+                    application_id: 
+                    role: "Engineering Manager"
+                    company: "Accenture"
+                    city: "Pune"
+                    data: "Response object from select api"
+                    bpp_id: "affinidi.com.bpp"
+                    bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    created_at: "2023-01-27T07:10:30Z"
+                courses: 
+                  - _id: "5f92cbf10cf217478ba93567"
+                    course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDJ"
+                    provider_id: "CEC"
+                    application_id: 
+                    title: "System Design"
+                    duration": "10 Hours"
+                    data: "Response object from select api"
+                    bpp_id: "bpp.dsep.samagra.i"
+                    bpp_uri: "https://bpp.dsep.samagra.io"
+                    created_at: "2023-01-27T07:10:30Z"
+                scholarships: 
+                  - _id: "5f92cbf10cf217478ba93569"
+                    scholarship_id: "SCM_58741445"
+                    provider_id: "ZQU31169990"
+                    fulfillment_id: "DSEP_FUL_58741445"
+                    application_id: 
+                    title: "XYZ Undergraduation scholarship for Economically Backward Students"
+                    category: "DSEP_CAT_2"
+                    data: "Response object from select api"
+                    bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                    bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    created_at: "2023-01-27T07:10:30Z"
+                mentorships: 
+                  - _id: "5f92cbf10cf217478ba93571"
+                    mentorship_id: "63e6298723df08285693637b"
+                    provider_id: "63d93aea62820fd9e6be9d1b"
+                    application_id: 
+                    mentor: "John Doe 2"
+                    mentorRating: "4.2"
+                    mentorshipTitle": "Class Room Engineering Level 1"
+                    data: "Response object from select api"
+                    bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                    bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    created_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: Saved items not found for user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/catalog/saved/{email}"
+                message: "Saved items not found for user"
+        '500':
+          description: Saved items could not be retrieved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/catalog/saved/{email}"
+                message: "Error processing request {specific error log from exception/error}"
+  /user/item/applied/{email}:
+    parameters:
+      - name: email
+        description: user email
+        in: path
+        required: true
+        schema:
+          type: string
+        example:
+          "test.user@gmail.com"
+    get:
+      tags:
+        - GetAppliedItems
+      summary: Get the user applied items for all dsep categories
+      responses:
+        '200':
+          description: Applied items for User
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoriesItem'
+              example:
+                jobs: 
+                  - _id: "5f92cbf10cf217478ba93564"
+                    job_id: "D7F8606A370DA9966DF15E62A81C374B"
+                    provider_id: "1"
+                    application_id: "1676633409805"
+                    role: "Architect"
+                    company: "Google"
+                    city: "Pune"
+                    data: "Response object from confirm api"
+                    bpp_id: "affinidi.com.bpp"
+                    bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    created_at: "2023-01-27T07:10:30Z"
+                courses: 
+                  - _id: "5f92cbf10cf217478ba93566"
+                    course_id: "Q291cnNlTGlzdDovbmQyX2NlYzIzX2NzMDI"
+                    provider_id: "CEC"
+                    application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
+                    title: "Problem solving Aspects and Python Programming"
+                    duration": "12 weeks"
+                    data: "Response object from confirm api"
+                    bpp_id: "bpp.dsep.samagra.i"
+                    bpp_uri: "https://bpp.dsep.samagra.io"
+                    created_at: "2023-01-27T07:10:30Z"
+                scholarships: 
+                  - _id: "5f92cbf10cf217478ba93568"
+                    scholarship_id: "SCM_58741444"
+                    provider_id: "ZQU31169990"
+                    fulfillment_id: "DSEP_FUL_58741444"
+                    application_id: "APP_32620371"
+                    title: "XYZ Undergraduation scholarship for Economically Backward Female Students"
+                    category: "DSEP_CAT_2"
+                    data: "Response object from confirm api"
+                    bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
+                    bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    created_at: "2023-01-27T07:10:30Z"
+                mentorships: 
+                  - _id: "5f92cbf10cf217478ba93570"
+                    mentorship_id: "63e6298723df08285693637a"
+                    provider_id: "63d93aea62820fd9e6be9d1b"
+                    application_id: "bcc0c798-81f2-4de5-823e-5769845b7d20"
+                    mentor: "John Doe"
+                    mentorRating: "4.7"
+                    mentorshipTitle": "Class Room Management Level 1"
+                    data: "Response object from confirm api"
+                    bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
+                    bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    created_at: "2023-01-27T07:10:30Z"
+        '404':
+          description: Applied items not found for user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "Application error"
+                code: "404"
+                path: "/user/catalog/applied/{email}"
+                message: "Applied items not found for user"
+        '500':
+          description: Applied items could not be retrieved due to unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: "System error"
+                code: "500"
+                path: "/user/catalog/applied/{email}"
+                message: "Error processing request {specific error log from exception/error}"
+components:
+  schemas:
+    UserProfile:
+      description: Schema for User Profile
+      type: object
+      required:
+        - email
+      properties:
+        _id:
+          type: string
+          description: Unique id for the profile
+        email:
+          type: string
+          description: User email
+        first_name:
+          type: string
+          description: User first name
+        middle_name:
+          type: string
+          description: User middle name
+        last_name:
+          type: string
+          description: User last name
+        full_name:
+          type: string
+          description: User full name
+        mobile:
+          type: string
+          description: User mobile number
+        created_at:
+          type: string
+          description: Time when the user profile is created
+        last_modofied_at:
+          type: string
+          description: Time when the user profile is updated
+    UserResume:
+      description: Schema for User resume
+      type: object
+      required:
+        - email
+      properties:
+        _id:
+          type: string
+          description: Unique id for the resume
+        user_id:
+          type: string
+          description: User id
+        document:
+          type: string
+          description: Resume blob
+        document_type:
+          type: string
+          description: Document type (Resume/Cover letter)
+        created_at:
+          type: string
+          description: Time when the resume is uploaded
+        last_used_at:
+          type: string
+          description: Time when the resume is used latest
+        last_modofied_at:
+          type: string
+          description: Time when the resume is updated
+    UserDocument:
+      description: Schema for User documents (resume/cover letter)
+      type: array
+      items:
+        oneOf:
+          - $ref: '#/components/schemas/UserResume'
+    UserItems:
+      description: Object to manage users saved and applied items for all categories
+      type: object
+      required:
+        - jobs
+        - courses
+        - scholarships
+        - mentorships
+      properties:
+        jobs:
+          description: Schema for jobs
+          type: object
+          properties:
+              saved:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Job'
+              applied:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/Job'
+        courses:
+          description: Schema for courses
+          type: object
+          properties:
+            saved:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Course'
+            applied:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Course'
+        scholarships:
+          description: Schema for scholarships
+          type: object
+          properties:
+            saved:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Scholarship'
+            applied:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Scholarship'
+        mentorships:
+          description: Schema for mentorships
+          type: object
+          properties:
+            saved:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Mentorship'
+            applied:
+              type: array
+              items:
+                oneOf:
+                  - $ref: '#/components/schemas/Mentorship'
+    CategoriesItem:
+      description: Object to manage items for all categories (either saved or applied)
+      type: object
+      required:
+        - jobs
+        - courses
+        - scholarships
+        - mentorships
+      properties:
+        jobs:
+          description: Schema for jobs
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        courses:
+          description: Schema for courses
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+        scholarships:
+          description: Schema for scholarships
+          type: array
+          items:
+            $ref: '#/components/schemas/Scholarship'
+        mentorships:
+          description: Schema for mentorships
+          type: array
+          items:
+            $ref: '#/components/schemas/Mentorship'
+    Job:
+      description: Schema for Job
+      type: object
+      required:
+        - job_id
+        - provider_id
+        - role
+        - company
+        - data
+        - bpp_id
+        - bpp_uri
+      properties:
+        _id:
+          type: string
+          description: Unique id for Job document
+        job_id:
+          type: string
+          description: Job id
+        provider_id:
+          type: string
+          description: Job provider id
+        application_id:
+          type: string
+          description: Job application id
+        role:
+          type: string
+          description: Job role
+        company:
+          type: string
+          description: Job ompany
+        city:
+          type: string
+          description: Job city
+        data:
+          type: string
+          description: Complete object received from BPP for select/confirm
+        bpp_id:
+          type: string
+          description: Application id of subscriber
+        bpp_uri:
+          type: string
+          description: Application uri of subscriber
+        created_at:
+          type: string
+          description: Time when the Job object is created 
+    Course:
+      description: Schema for course
+      type: object
+      required:
+        - course_id
+        - provider_id
+        - title
+        - duration
+        - data
+        - bpp_id
+        - bpp_uri
+      properties:
+        _id:
+          type: string
+          description: Unique id for Course document
+        course_id:
+          type: string
+          description: Course id
+        provider_id:
+          type: string
+          description: Course provider
+        application_id:
+          type: string
+          description: Course application id
+        title:
+          type: string
+          description: Course title
+        duration:
+          type: string
+          description: Course duration
+        data:
+          type: string
+          description: Complete object received from BPP for select/confirm
+        bpp_id:
+          type: string
+          description: Application id of subscriber
+        bpp_uri:
+          type: string
+          description: Application uri of subscriber
+        created_at:
+          type: string
+          description: Time when the Course object is created       
+    Scholarship:
+      description: Response object for scholarship
+      type: object
+      required:
+        - scholarship_id
+        - provider_id
+        - fulfillment_id
+        - title
+        - category
+        - data
+        - bpp_id
+        - bpp_uri
+      properties:
+        _id:
+          type: string
+          description: Unique id for Mentorship document
+        scholarship_id:
+          type: string
+          description: Scholarship id
+        provider_id:
+          type: string
+          description: Scholarship provider
+        fulfillment_id:
+          type: string
+          description: Scholarship fulfillment id
+        application_id:
+          type: string
+          description: Scholarship application id
+        title:
+          type: string
+          description: Scholarship title
+        category:
+          type: string
+          description: Scholarship category
+        data:
+          type: string
+          description: Complete object received from BPP for select/confirm
+        bpp_id:
+          type: string
+          description: Application id of subscriber
+        bpp_uri:
+          type: string
+          description: Application uri of subscriber
+        created_at:
+          type: string
+          description: Time when the mentorship object is created
+    Mentorship:
+      description: Schema for mentorship
+      type: object
+      required:
+        - mentorship_id
+        - provider_id
+        - mentor
+        - mentorRating
+        - mentorshipTitle
+        - data
+        - bpp_id
+        - bpp_uri
+      properties:
+        _id:
+          type: string
+          description: Unique id for Mentorship
+        mentorship_id:
+          type: string
+          description: Mentorship id
+        provider_id:
+          type: string
+          description: Mentorship provider
+        application_id:
+          type: string
+          description: Mentorship application id
+        mentor:
+          type: string
+          description: Mentor name
+        mentorRating:
+          type: string
+          description: Mentor rating
+        mentorshipTitle:
+          type: string
+          description: mentorship name
+        data:
+          type: string
+          description: Complete object received from BPP for select/confirm
+        bpp_id:
+          type: string
+          description: Application id of subscriber
+        bpp_uri:
+          type: string
+          description: Application uri of subscriber
+        created_at:
+          type: string
+          description: Time when the mentorship object is created
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        type:
+          description: Type of error
+          type: string
+        code:
+          description: DSEP specific error code
+          type: string
+        path:
+          description: Path to json schema generating the error. Used only during json schema validation errors
+          type: string
+        message:
+          description: Human readable error message from dsep API
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+security:
+  - ApiKey: []
+servers:
+  - url: https://api.dsep.becknprotocol.io/v1
+    variables: {}
