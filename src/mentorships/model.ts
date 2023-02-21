@@ -5,6 +5,7 @@ interface Imentorship {
     mentorship_id: string;
     mentor: String;
     provider_id: string;
+    application_id: string;
     credentials: String;
     experties: String;
     bpp_id: String;
@@ -17,6 +18,7 @@ interface Imentorship {
 const mentorshipSchema = {
     mentorship_id: { type: String, required: false },
     provider_id: { type: String, required: false },
+    application_id: { type: String, required: false },
     mentor: {
         type: String,
         required: true,
