@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 0.0.2
+  version: 0.0.4
   title: DSEP Backend API
   description: Backend API to manage DSEP user profile.
 paths:
@@ -265,6 +265,7 @@ paths:
                   data: "Response object from select api"
                   bpp_id: "affinidi.com.bpp"
                   bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add applied Job:
                 value:
@@ -278,6 +279,7 @@ paths:
                   data: "Response object from confirm api"
                   bpp_id: "affinidi.com.bpp"
                   bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add saved Course:
                 value:
@@ -286,10 +288,12 @@ paths:
                   provider_id: "CEC"
                   application_id: 
                   title: "System Design"
-                  duration": "10 Hours"
+                  duration: "10 Hours"
+                  courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                   data: "Response object from select api"
                   bpp_id: "bpp.dsep.samagra.i"
                   bpp_uri: "https://bpp.dsep.samagra.io"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add applied Course:
                 value:
@@ -298,10 +302,12 @@ paths:
                   provider_id: "CEC"
                   application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
                   title: "Problem solving Aspects and Python Programming"
-                  duration": "12 weeks"
+                  duration: "12 weeks"
+                  courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                   data: "Response object from confirm api"
                   bpp_id: "bpp.dsep.samagra.i"
                   bpp_uri: "https://bpp.dsep.samagra.io"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add saved Scholarship:
                 value:
@@ -315,6 +321,7 @@ paths:
                   data: "Response object from select api"
                   bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                   bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add applied Scholarship:
                 value:
@@ -328,32 +335,39 @@ paths:
                   data: "Response object from confirm api"
                   bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                   bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add saved Mentorship:
                 value:
                   _id: "5f92cbf10cf217478ba93571"
+                  mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                   mentorship_id: "63e6298723df08285693637b"
                   provider_id: "63d93aea62820fd9e6be9d1b"
                   application_id: 
                   mentor: "John Doe 2"
                   mentorRating: "4.2"
-                  mentorshipTitle": "Class Room Engineering Level 1"
+                  mentorshipTitle: "Class Room Engineering Level 1"
+                  mentorshipSessionJoinLink: "joinLink"
                   data: "Response object from select api"
                   bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                   bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
               Add applied Mentorship:
                 value:
                   _id: "5f92cbf10cf217478ba93570"
+                  mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                   mentorship_id: "63e6298723df08285693637a"
                   provider_id: "63d93aea62820fd9e6be9d1b"
                   application_id: ""
                   mentor: "John Doe"
                   mentorRating: "4.7"
-                  mentorshipTitle": "Class Room Management Level 1"
+                  mentorshipTitle: "Class Room Management Level 1"
+                  mentorshipSessionJoinLink: "joinLink"
                   data: "Response object from confirm api"
                   bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                   bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                  transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                   created_at: "2023-01-27T07:10:30Z"
       responses:
         '200':
@@ -379,6 +393,7 @@ paths:
                     data: "Response object from select api"
                     bpp_id: "affinidi.com.bpp"
                     bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add applied Job:
                   value:
@@ -391,6 +406,7 @@ paths:
                     data: "Response object from confirm api"
                     bpp_id: "affinidi.com.bpp"
                     bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add saved Course:
                   value:
@@ -398,10 +414,12 @@ paths:
                     provider_id: "CEC"
                     application_id: 
                     title: "System Design"
-                    duration": "10 Hours"
+                    duration: "10 Hours"
+                    courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                     data: "Response object from select api"
                     bpp_id: "bpp.dsep.samagra.i"
                     bpp_uri: "https://bpp.dsep.samagra.io"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add applied Course:
                   value:
@@ -409,10 +427,12 @@ paths:
                     provider_id: "CEC"
                     application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
                     title: "Problem solving Aspects and Python Programming"
-                    duration": "12 weeks"
+                    duration: "12 weeks"
+                    courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                     data: "Response object from confirm api"
                     bpp_id: "bpp.dsep.samagra.i"
                     bpp_uri: "https://bpp.dsep.samagra.io"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add saved Scholarship:
                   value:
@@ -425,6 +445,7 @@ paths:
                     data: "Response object from select api"
                     bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                     bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add applied Scholarship:
                   value:
@@ -437,30 +458,37 @@ paths:
                     data: "Response object from confirm api"
                     bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                     bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add saved Mentorship:
                   value:
+                    mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                     mentorship_id: "63e6298723df08285693637b"
                     provider_id: "63d93aea62820fd9e6be9d1b"
                     application_id: 
                     mentor: "John Doe 2"
                     mentorRating: "4.2"
-                    mentorshipTitle": "Class Room Engineering Level 1"
+                    mentorshipTitle: "Class Room Engineering Level 1"
+                    mentorshipSessionJoinLink: "joinLink"
                     data: "Response object from select api"
                     bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                     bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 Add applied Mentorship:
                   value:
+                    mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                     mentorship_id: "63e6298723df08285693637a"
                     provider_id: "63d93aea62820fd9e6be9d1b"
                     application_id: ""
                     mentor: "John Doe"
                     mentorRating: "4.7"
-                    mentorshipTitle": "Class Room Management Level 1"
+                    mentorshipTitle: "Class Room Management Level 1"
+                    mentorshipSessionJoinLink: "joinLink"
                     data: "Response object from confirm api"
                     bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                     bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
         '404':
           description: User item could not be saved
@@ -518,6 +546,7 @@ paths:
                       data: "Response object from select api"
                       bpp_id: "affinidi.com.bpp"
                       bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                   applied: 
                     - _id: "5f92cbf10cf217478ba93564"
@@ -530,6 +559,7 @@ paths:
                       data: "Response object from confirm api"
                       bpp_id: "affinidi.com.bpp"
                       bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                 courses: 
                   saved: 
@@ -538,10 +568,12 @@ paths:
                       provider_id: "CEC"
                       application_id: 
                       title: "System Design"
-                      duration": "10 Hours"
+                      duration: "10 Hours"
+                      courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                       data: "Response object from select api"
                       bpp_id: "bpp.dsep.samagra.i"
                       bpp_uri: "https://bpp.dsep.samagra.io"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                   applied: 
                     - _id: "5f92cbf10cf217478ba93566"
@@ -549,10 +581,12 @@ paths:
                       provider_id: "CEC"
                       application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
                       title: "Problem solving Aspects and Python Programming"
-                      duration": "12 weeks"
+                      duration: "12 weeks"
+                      courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                       data: "Response object from confirm api"
                       bpp_id: "bpp.dsep.samagra.i"
                       bpp_uri: "https://bpp.dsep.samagra.io"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                 scholarships: 
                   saved: 
@@ -566,6 +600,7 @@ paths:
                       data: "Response object from select api"
                       bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                       bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                   applied: 
                     - _id: "5f92cbf10cf217478ba93568"
@@ -578,31 +613,38 @@ paths:
                       data: "Response object from confirm api"
                       bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                       bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                 mentorships: 
                   saved: 
                     - _id: "5f92cbf10cf217478ba93571"
+                      mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                       mentorship_id: "63e6298723df08285693637b"
                       provider_id: "63d93aea62820fd9e6be9d1b"
                       application_id: 
                       mentor: "John Doe 2"
                       mentorRating: "4.2"
-                      mentorshipTitle": "Class Room Engineering Level 1"
+                      mentorshipTitle: "Class Room Engineering Level 1"
+                      mentorshipSessionJoinLink: "joinLink"
                       data: "Response object from select api"
                       bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                       bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
                   applied: 
                     - _id: "5f92cbf10cf217478ba93570"
+                      mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                       mentorship_id: "63e6298723df08285693637a"
                       provider_id: "63d93aea62820fd9e6be9d1b"
                       application_id: "bcc0c798-81f2-4de5-823e-5769845b7d20"
                       mentor: "John Doe"
                       mentorRating: "4.7"
-                      mentorshipTitle": "Class Room Management Level 1"
+                      mentorshipTitle: "Class Room Management Level 1"
+                      mentorshipSessionJoinLink: "joinLink"
                       data: "Response object from confirm api"
                       bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                       bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                      transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                       created_at: "2023-01-27T07:10:30Z"
         '404':
           description: User saved and applied data for dsep categories not found for sessionId
@@ -659,6 +701,7 @@ paths:
                     data: "Response object from select api"
                     bpp_id: "affinidi.com.bpp"
                     bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 courses: 
                   - _id: "5f92cbf10cf217478ba93567"
@@ -666,10 +709,12 @@ paths:
                     provider_id: "CEC"
                     application_id: 
                     title: "System Design"
-                    duration": "10 Hours"
+                    duration: "10 Hours"
+                    courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                     data: "Response object from select api"
                     bpp_id: "bpp.dsep.samagra.i"
                     bpp_uri: "https://bpp.dsep.samagra.io"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 scholarships: 
                   - _id: "5f92cbf10cf217478ba93569"
@@ -682,18 +727,22 @@ paths:
                     data: "Response object from select api"
                     bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                     bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 mentorships: 
                   - _id: "5f92cbf10cf217478ba93571"
+                    mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                     mentorship_id: "63e6298723df08285693637b"
                     provider_id: "63d93aea62820fd9e6be9d1b"
                     application_id: 
                     mentor: "John Doe 2"
                     mentorRating: "4.2"
-                    mentorshipTitle": "Class Room Engineering Level 1"
+                    mentorshipTitle: "Class Room Engineering Level 1"
+                    mentorshipSessionJoinLink: "joinLink"
                     data: "Response object from select api"
                     bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                     bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
         '404':
           description: Saved items not found for user
@@ -750,6 +799,7 @@ paths:
                     data: "Response object from confirm api"
                     bpp_id: "affinidi.com.bpp"
                     bpp_uri: "https://6vs8xnx5i7.execute-api.ap-south-1.amazonaws.com/dsep"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 courses: 
                   - _id: "5f92cbf10cf217478ba93566"
@@ -757,10 +807,12 @@ paths:
                     provider_id: "CEC"
                     application_id: "a9aaecca-10b7-4d19-b640-b047a7c621961676717364777"
                     title: "Problem solving Aspects and Python Programming"
-                    duration": "12 weeks"
+                    duration: "12 weeks"
+                    courseUrl: "https://onlinecourses.swayam2.ac.in/cec23_cs02/preview"
                     data: "Response object from confirm api"
                     bpp_id: "bpp.dsep.samagra.i"
                     bpp_uri: "https://bpp.dsep.samagra.io"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 scholarships: 
                   - _id: "5f92cbf10cf217478ba93568"
@@ -773,18 +825,22 @@ paths:
                     data: "Response object from confirm api"
                     bpp_id: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1"
                     bpp_uri: "https://proteanrc.centralindia.cloudapp.azure.com/dsep-bpp-1/public"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
                 mentorships: 
                   - _id: "5f92cbf10cf217478ba93570"
+                    mentorshipSession_id: "3f8fb3a3-f018-40e6-9b96-8b7bbd5df965"
                     mentorship_id: "63e6298723df08285693637a"
                     provider_id: "63d93aea62820fd9e6be9d1b"
                     application_id: "bcc0c798-81f2-4de5-823e-5769845b7d20"
                     mentor: "John Doe"
                     mentorRating: "4.7"
-                    mentorshipTitle": "Class Room Management Level 1"
+                    mentorshipTitle: "Class Room Management Level 1"
+                    mentorshipSessionJoinLink: "joinLink"
                     data: "Response object from confirm api"
                     bpp_id: "dev.elevate-apis.shikshalokam.org/bpp"
                     bpp_uri: "https://dev.elevate-apis.shikshalokam.org/bpp"
+                    transaction_id: "bdb5ba09-2241-4f00-b434-73466cd06228"
                     created_at: "2023-01-27T07:10:30Z"
         '404':
           description: Applied items not found for user
@@ -1012,6 +1068,9 @@ components:
         bpp_uri:
           type: string
           description: Application uri of subscriber
+        transaction_id:
+          type: string
+          description: Transaction id
         created_at:
           type: string
           description: Time when the Job object is created 
@@ -1045,6 +1104,9 @@ components:
         duration:
           type: string
           description: Course duration
+        courseUrl:
+          type: string
+          description: Course url
         data:
           type: string
           description: Complete object received from BPP for select/confirm
@@ -1054,6 +1116,9 @@ components:
         bpp_uri:
           type: string
           description: Application uri of subscriber
+        transaction_id:
+          type: string
+          description: Transaction id
         created_at:
           type: string
           description: Time when the Course object is created       
@@ -1100,6 +1165,9 @@ components:
         bpp_uri:
           type: string
           description: Application uri of subscriber
+        transaction_id:
+          type: string
+          description: Transaction id
         created_at:
           type: string
           description: Time when the mentorship object is created
@@ -1119,6 +1187,9 @@ components:
         _id:
           type: string
           description: Unique id for Mentorship
+        mentorshipSession_id:
+          type: string
+          description: Mentorship session id
         mentorship_id:
           type: string
           description: Mentorship id
@@ -1137,6 +1208,9 @@ components:
         mentorshipTitle:
           type: string
           description: mentorship name
+        mentorshipSessionJoinLink:
+          type: string
+          description: mentorship ession join link
         data:
           type: string
           description: Complete object received from BPP for select/confirm
@@ -1146,6 +1220,9 @@ components:
         bpp_uri:
           type: string
           description: Application uri of subscriber
+        transaction_id:
+          type: string
+          description: Transaction id
         created_at:
           type: string
           description: Time when the mentorship object is created
@@ -1174,5 +1251,5 @@ components:
 security:
   - ApiKey: []
 servers:
-  - url: https://api.dsep.becknprotocol.io/v1
+  - url: https://api.dsep-bap-api.becknprotocol.io/v1
     variables: {}
