@@ -7,6 +7,7 @@ interface Icourses {
     application_id: string;
     title: String;
     duration: String;
+    url: String;
     bpp_id: String;
     bpp_uri: String;
     active: Boolean;
@@ -25,6 +26,7 @@ const courseSchema = {
     title: { type: String, required: false },
     data: { type: String, required: false },
     duration: { type: String, required: false },
+    url: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
     active: { type: Boolean, default: false },

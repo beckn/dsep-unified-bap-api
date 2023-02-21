@@ -7,6 +7,7 @@ interface Imentorship {
     provider_id: string;
     application_id: string;
     credentials: String;
+    url: String;
     experties: String;
     bpp_id: String;
     bpp_uri: String;
@@ -27,6 +28,7 @@ const mentorshipSchema = {
     mentorshipTitle: { type: String, required: false },
     data: { type: String, required: false },
     credentials: { type: String, required: false },
+    url: { type: String, required: false },
     experties: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
