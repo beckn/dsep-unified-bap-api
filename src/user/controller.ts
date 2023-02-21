@@ -81,7 +81,7 @@ export const savedItems = async (req: Request, res: Response, next: NextFunction
             }
             return next()
         }
-        let jobs: any = await SavedJobs.find({ user_id: userDetails?.id }).populate("job_id")
+        let jobs: any = await SavedJobs.find({ user_id: userDetails?.id }).populate("job_id", "user_id")
         let mentorship = await SavedMentorships.find({ user_id: userDetails?.id }).populate("mentorship_id")
         let scholarship = await SavedScholarships.find({ user_id: userDetails?.id }).populate("scholarship_id")
         let courses = await SavedCourses.find({ user_id: userDetails?.id }).populate("course_id")
@@ -252,12 +252,13 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                     job_id: body.job_id,
                     comapny: body.company,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     city: body.city,
                     role: body.role,
                     bpp_id: body.bpp_id,
                     bpp_uri: body.bpp_uri,
                     data: body.data,
-                    location_type: "Do",
+                    location_type: body?.location_type ?? null,
                     active: true,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
@@ -274,29 +275,30 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'job' && action === 'applied') {
             let response;
-            const jobData: any = await Job.findOne({ job_id: body?.job_id, provider_id: body?.provider_id })
+            const jobData: any = await Job.findOneAndUpdate({ job_id: body?.job_id, provider_id: body?.provider_id }, { application_id: body?.application_id })
+            const getJob: any = await Job.findOne({ job_id: body?.job_id, provider_id: body?.provider_id })
             const deleteSave = await SavedJobs.deleteOne({ job_id: jobData?.id, user_id: userDetails?.id })
-            if (jobData) {
-                console.log(jobData)
+            if (getJob) {
                 const appliedJob = await AppliedJobs.create({
                     user_id: userDetails?.id,
-                    job_id: jobData?.id,
+                    job_id: getJob?.id,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
                 })
-                return res.json(jobData)
+                return res.json(getJob)
             }
             else {
                 const jobData = await Job.create({
                     job_id: body.job_id,
                     comapny: body.company,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     city: body.city,
                     role: body.role,
                     bpp_id: body.bpp_id,
                     bpp_uri: body.bpp_uri,
                     data: body.data,
-                    location_type: "Do",
+                    location_type: body?.location_type ?? null,
                     active: true,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
@@ -326,8 +328,9 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             }
             else {
                 const courseData = await Courses.create({
-                    course_id: body.job_id,
+                    course_id: body.course_id,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     title: body.title,
                     duration: body.duration,
                     bpp_id: body.bpp_id,
@@ -349,21 +352,23 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'course' && action === 'applied') {
             let response;
-            const courseData: any = await Courses.findOne({ course_id: body?.course_id, provider_id: body?.provider_id })
-            const deleteSave = await SavedCourses.deleteOne({ course_id: courseData?.id, user_id: userDetails?.id })
-            if (courseData) {
+            const courseUpdate: any = await Courses.findOneAndUpdate({ course_id: body?.course_id, provider_id: body?.provider_id }, { application_id: body?.application_id })
+            const getCourse: any = await Courses.findOne({ course_id: body?.course_id, provider_id: body?.provider_id })
+            const deleteSave = await SavedCourses.deleteOne({ course_id: getCourse?.id, user_id: userDetails?.id })
+            if (getCourse) {
                 const appliedCourses = await AppliedCourses.create({
                     user_id: userDetails?.id,
-                    course_id: courseData?.id,
+                    course_id: getCourse?.id,
                     created_at: Date.now(),
                     last_modified_at: Date.now()
                 })
-                return res.json(courseData)
+                return res.json(getCourse)
             }
             else {
                 const courseData = await Courses.create({
                     course_id: body.course_id,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     title: body.title,
                     duration: body.duration,
                     bpp_id: body.bpp_id,
@@ -398,8 +403,9 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             }
             else {
                 const scholarshipData = await Scholarships.create({
-                    scholarship_id: body.job_id,
+                    scholarship_id: body.scholarship_id,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     fulfillment_id: body.fulfillment_id,
                     title: body.title,
                     category: body.category,
@@ -422,6 +428,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'scholarship' && action === 'applied') {
             let response;
+            const scholarshipUpdate: any = await Scholarships.findOneAndUpdate({ scholarship_id: body?.scholarship_id, provider_id: body?.provider_id }, { application_id: body?.application_id })
             const scholarshipData: any = await Scholarships.findOne({ scholarship_id: body?.scholarship_id, provider_id: body?.provider_id })
             const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: scholarshipData?.id, user_id: userDetails?.id })
             if (scholarshipData) {
@@ -435,8 +442,9 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             }
             else {
                 const scholarshipData = await Courses.create({
-                    scholarship_id: body.job_id,
+                    scholarship_id: body.scholarship_id,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     fulfillment_id: body.fulfillment_id,
                     title: body.title,
                     category: body.category,
@@ -475,6 +483,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                     mentorship_id: body.mentorship_id,
                     mentor: body.mentor,
                     provider_id: body.provider_id,
+                    application_id: body?.application_id ?? null,
                     credentials: body.credentials,
                     experties: body.experties,
                     bpp_id: body.bpp_id,
@@ -496,8 +505,9 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'mentorship' && action === 'applied') {
             let response;
+            const mentorshipUpdate: any = await Mentorships.findOneAndUpdate({ mentorship_id: body?.mentorship_id, provider_id: body?.provider_id }, { application_id: body?.application_id })
             const mentorshipData: any = await Mentorships.findOne({ mentorship_id: body?.mentorship_id, provider_id: body?.provider_id })
-            const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: mentorshipData?.id, user_id: userDetails?.id })
+            const deleteSave = await SavedMentorships.deleteOne({ scholarship_id: mentorshipData?.id, user_id: userDetails?.id })
             if (mentorshipData) {
                 const appliedMentorship = await AppliedMentorship.create({
                     user_id: userDetails?.id,
@@ -512,6 +522,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             else {
                 const mentorshipData = await Mentorships.create({
                     mentorship_id: body.mentorship_id,
+                    application_id: body?.application_id ?? null,
                     mentor: body.mentor,
                     credentials: body.credentials,
                     provider_id: body.provider_id,

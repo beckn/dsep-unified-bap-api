@@ -5,6 +5,7 @@ interface IJob {
     job_id: string;
     company: string;
     provider_id: string;
+    application_id: string;
     city: string;
     role: string;
     bpp_id: string;
@@ -23,6 +24,7 @@ const JobSchema = {
         required: true,
     },
     provider_id: { type: String, required: false },
+    application_id: { type: String, required: false },
     city: { type: String, required: false },
     role: { type: String, required: false },
     bpp_id: { type: String, required: false },
