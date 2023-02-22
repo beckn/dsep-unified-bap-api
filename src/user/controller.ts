@@ -374,7 +374,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             if (saved) {
                 return res.json({ message: "Mentorship Already Saved" })
             }
-            const mentorshipData = await Mentorships.create({
+            const mentorshipData = await SavedMentorships.create({
                 user_id: userDetails?.id,
                 mentorship_id: body.mentorship_id,
                 mentor: body.mentor,
@@ -396,7 +396,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'mentorship' && action === 'applied') {
             const deleteSave = await SavedMentorships.deleteOne({ scholarship_id: body?.id, user_id: userDetails?.id })
-            const mentorshipData = await Mentorships.create({
+            const mentorshipData = await AppliedMentorship.create({
                 user_id: userDetails?.id,
                 mentorship_id: body.mentorship_id,
                 application_id: body?.application_id ?? null,
