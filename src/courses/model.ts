@@ -5,9 +5,10 @@ interface Icourses {
     course_id: string;
     provider_id: String
     application_id: string;
+    transiction_id: string;
     title: String;
     duration: String;
-    url: String;
+    course_url: String;
     bpp_id: String;
     bpp_uri: String;
     active: Boolean;
@@ -23,10 +24,11 @@ const courseSchema = {
         required: true,
     },
     application_id: { type: String, required: false },
+    transiction_id: { type: String, required: false },
     title: { type: String, required: false },
     data: { type: String, required: false },
     duration: { type: String, required: false },
-    url: { type: String, required: false },
+    course_url: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
     active: { type: Boolean, default: false },
