@@ -6,6 +6,9 @@ interface Imentorship {
     mentor: String;
     provider_id: string;
     application_id: string;
+    transiction_id: string;
+    mentorshipSession_id: string;
+    mentorshipSessionJoinLink: string;
     credentials: String;
     url: String;
     experties: String;
@@ -20,6 +23,8 @@ const mentorshipSchema = {
     mentorship_id: { type: String, required: false },
     provider_id: { type: String, required: false },
     application_id: { type: String, required: false },
+    transiction_id: { type: String, required: false },
+    mentorshipSession_id: { type: String, required: false },
     mentor: {
         type: String,
         required: true,
@@ -28,7 +33,7 @@ const mentorshipSchema = {
     mentorshipTitle: { type: String, required: false },
     data: { type: String, required: false },
     credentials: { type: String, required: false },
-    url: { type: String, required: false },
+    mentorshipSessionJoinLink: { type: String, required: false },
     experties: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
