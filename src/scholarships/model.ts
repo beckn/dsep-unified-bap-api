@@ -5,7 +5,7 @@ interface Ischolarship {
     scholarship_id: string;
     provider_id: String;
     application_id: string;
-    transiction_id: string;
+    transaction_id: string;
     fulfillment_id: string;
     title: String;
     category: String;
@@ -24,7 +24,7 @@ const scholarshipSchema = {
         required: true,
     },
     application_id: { type: String, required: false },
-    transiction_id: { type: String, required: false },
+    transaction_id: { type: String, required: false },
     fulfillment_id: { type: String, required: false },
     title: { type: String, required: false },
     category: { type: String, required: false },

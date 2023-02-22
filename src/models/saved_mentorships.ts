@@ -9,7 +9,7 @@ interface ISavedMentorship {
     mentorshipTitle: string;
     provider_id: string;
     application_id: string;
-    transiction_id: string;
+    transaction_id: string;
     mentorshipSession_id: string;
     mentorshipSessionJoinLink: string;
     credentials: String;
@@ -23,7 +23,7 @@ const savedMentorshipSchema = {
     mentorship_id: { type: String, required: false },
     provider_id: { type: String, required: false },
     application_id: { type: String, required: false },
-    transiction_id: { type: String, required: false },
+    transaction_id: { type: String, required: false },
     mentorshipSession_id: { type: String, required: false },
     mentor: {
         type: String,
