@@ -258,7 +258,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
             return res.json(jobData)
         }
         if (category === 'job' && action === 'applied') {
-            const deleteSave = await SavedJobs.deleteOne({ job_id: body?.id, user_id: userDetails?.id })
+            const deleteSave = await SavedJobs.deleteOne({ job_id: body?.job_id, user_id: userDetails?.id })
             const jobData = await AppliedJobs.create({
                 user_id: userDetails?.id,
                 job_id: body.job_id,
@@ -305,7 +305,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         if (category === 'course' && action === 'applied') {
             let response;
             const deleteSave = await SavedCourses.deleteOne({ course_id: body?.course_id, user_id: userDetails?.id })
-            const courseData = await Courses.create({
+            const courseData = await AppliedCourses.create({
                 user_id: userDetails?.id,
                 course_id: body.course_id,
                 provider_id: body.provider_id,
@@ -349,8 +349,8 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
         }
         if (category === 'scholarship' && action === 'applied') {
             let response;
-            const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: body?.id, user_id: userDetails?.id })
-            const scholarshipData = await Courses.create({
+            const deleteSave = await SavedScholarships.deleteOne({ scholarship_id: body?.scholarship_id, user_id: userDetails?.id })
+            const scholarshipData = await AppliedScholarships.create({
                 user_id: userDetails?.id,
                 scholarship_id: body.scholarship_id,
                 provider_id: body.provider_id,
@@ -395,7 +395,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
 
         }
         if (category === 'mentorship' && action === 'applied') {
-            const deleteSave = await SavedMentorships.deleteOne({ scholarship_id: body?.id, user_id: userDetails?.id })
+            const deleteSave = await SavedMentorships.deleteOne({ mentorship_id: body?.id, user_id: userDetails?.id })
             const mentorshipData = await AppliedMentorship.create({
                 user_id: userDetails?.id,
                 mentorship_id: body.mentorship_id,
