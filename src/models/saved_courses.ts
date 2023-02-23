@@ -28,7 +28,7 @@ const savedCourseSchema = {
     title: { type: String, required: false },
     data: { type: String, required: false },
     duration: { type: String, required: false },
-    course_url: { type: String, required: false },
+    courseUrl: { type: String, required: false },
     bpp_id: { type: String, required: false },
     bpp_uri: { type: String, required: false },
     created_at: { type: Number, required: false },
