@@ -6,7 +6,7 @@ interface ISavedCourse {
     course_id: string;
     provider_id: String
     application_id: string;
-    transiction_id: string;
+    transaction_id: string;
     title: String;
     duration: String;
     course_url: String;
@@ -24,7 +24,7 @@ const savedCourseSchema = {
         required: true,
     },
     application_id: { type: String, required: false },
-    transiction_id: { type: String, required: false },
+    transaction_id: { type: String, required: false },
     title: { type: String, required: false },
     data: { type: String, required: false },
     duration: { type: String, required: false },
