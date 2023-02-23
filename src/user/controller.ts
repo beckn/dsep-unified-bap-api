@@ -295,7 +295,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                 bpp_id: body.bpp_id,
                 bpp_uri: body.bpp_uri,
                 data: body.data,
-                course_url: body?.course_url ?? null,
+                courseUrl: body?.courseUrl ?? null,
                 active: true,
                 created_at: Date.now(),
                 last_modified_at: Date.now()
@@ -313,7 +313,7 @@ export const myItem = async (req: Request, res: Response, next: NextFunction) =>
                 transaction_id: body?.transaction_id ?? null,
                 title: body.title,
                 duration: body.duration,
-                course_url: body?.course_url ?? null,
+                courseUrl: body?.courseUrl ?? null,
                 bpp_id: body.bpp_id,
                 bpp_uri: body.bpp_uri,
                 data: body.data,
